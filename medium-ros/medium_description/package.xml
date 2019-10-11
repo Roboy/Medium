@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>medium_description</name>
+  <version>1.2.2</version>
+  <description>3D models of the sensor for visualization.</description>
+
+  <maintainer email="christopher.lang@tum.de">Christopher Lang</maintainer>
+  <author>Lennart Aigner</author>
+
+  <license>BSD 3-Clause</license>
+  <url type="website">https://toposens.com</url>
+  <url type="repository">https://gitlab.com/toposens/public/ros-packages</url>
+  <url type="bugtracker">https://gitlab.com/toposens/public/ros-packages/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+</package>

@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+  <robot name="spezi_box" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <material name="light_grey">
+      <color rgba="0.8 0.8 0.8 1.0"/>
+  </material>
+
+  <joint name="base_link_to_map" type="fixed">
+    <parent link="base_link"/>
+      <child link="map"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <joint name="base_link_to_camera" type="fixed">
+    <parent link="base_link"/>
+      <child link="camera"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <joint name="camera_to_toposens" type="fixed">
+    <parent link="camera"/>
+      <child link="toposens"/>
+    <origin xyz="-0.085 -0.17 0"
+            rpy="0 -3.1416/2 0"/>
+  </joint>
+
+  <joint name="camera_to_walabot" type="fixed">
+    <parent link="camera"/>
+      <child link="walabot"/>
+    <origin xyz="-0.11 0.02 0"/>
+  </joint>
+
+  <link name="toposens"/>
+  <link name="walabot"/>
+  <link name="camera"/>
+  <link name="base_link" />
+  <link name="map" />
+
+</robot>

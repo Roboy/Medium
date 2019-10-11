@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="path_to_bag_file" default="/home/kingkolibri/10_catkin_ws/rosbag/lenny1_changing.bag" />
+
+  <!-- Playback node -->
+  <node pkg="rosbag" type="play" name="player"
+        output="screen"
+        args="--clock --delay=3 $(arg path_to_bag_file)" />
+
+  <!-- Estimator node -->
+  <node name="p2g_pose_classifier_node"
+        pkg="p2g_ros_classifier"
+        type="pose_classifier_node.py"
+        output="screen"/>
+
+</launch>

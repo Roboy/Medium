@@ -1,0 +1,17 @@
+<launch>
+  <arg name="frame_id" default="position2go" />
+  <arg name="type" default="base" /> <!-- alternatives: base/target -->
+
+  <!--node pkg="p2g_ros_driver" type="p2g_ros_driver_node" name="p2g_driver_node" output="screen">
+    <param name="frame_id" value="$(arg frame_id)" />
+    <param name="type" value="$(arg type)" />
+  </node-->
+
+
+  <node pkg="p2g_ros_driver" type="p2g_ros_driver_node" name="p2g_driver_node0" output="screen">
+    <param name="frame_id" value="p2g_0" />
+    <param name="type" value="$(arg type)" />
+    <param name="port" value="/dev/ttyACM0"/>
+  </node>
+
+</launch>

@@ -1,0 +1,18 @@
+<launch>
+
+	<node pkg="tf" type="static_transform_publisher" name="radar_to_base" args="0 0 0 0 0 0 map position2go 10" />
+
+	<include file="$(find p2g_ros_driver)/launch/p2g.launch">
+		<arg name="frame_id" value="position2go" />
+		<arg name="type" value="target" />
+	</include>
+
+	<node pkg="p2g_ros_markers" type="p2g_ros_markers_node"
+		  name="p2g_ros_markers_node"
+		  output="screen" />
+		<param name="frame_id" value="position2go" />
+	</node>
+
+	<node pkg="rviz" type="rviz" name="markers_visualization" output="screen" args="-d $(find p2g_ros_markers)/rviz/p2g.rviz"/>
+
+</launch>

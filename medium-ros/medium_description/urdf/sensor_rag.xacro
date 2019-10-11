@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<robot name="sensor_rag" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <material name="light_grey">
+      <color rgba="0.8 0.8 0.8 1.0"/>
+  </material>
+
+  <joint name="base_link_to_map" type="fixed">
+    <parent link="base_link"/>
+      <child link="map"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <joint name="base_link_to_camera" type="fixed">
+    <parent link="base_link"/>
+      <child link="camera"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <joint name="camera_to_p2g_0" type="fixed">
+    <parent link="camera"/>
+      <child link="p2g_0"/>
+    <origin xyz="-0.18 -0.13 0"/>
+  </joint>
+
+  <joint name="camera_to_p2g_1" type="fixed">
+    <parent link="camera"/>
+      <child link="p2g_1"/>
+    <origin xyz="-0.18 0.015 0"/>
+  </joint>
+  <joint name="camera_to_p2g_2" type="fixed">
+    <parent link="camera"/>
+      <child link="p2g_2"/>
+    <origin xyz="0.18 -0.015 0"/>
+  </joint>
+  <joint name="camera_to_p2g_3" type="fixed">
+    <parent link="camera"/>
+      <child link="p2g_3"/>
+    <origin xyz="0.18 -0.13 0"/>
+  </joint>
+
+  <joint name="camera_to_ts3_0" type="fixed">
+    <parent link="camera"/>
+      <child link="toposens"/>
+    <origin xyz="-0.085 -0.17 0"
+            rpy="0 -3.1416/2 0"/>
+  </joint>
+  <joint name="camera_to_ts3_1" type="fixed">
+    <parent link="camera"/>
+      <child link="ts3_1"/>
+    <origin xyz="-0.085 0.19 0"
+            rpy="0 -3.1416/2 0"/>
+  </joint>
+
+  <joint name="camera_to_walabot" type="fixed">
+    <parent link="camera"/>
+      <child link="walabot"/>
+    <origin xyz="-0.11 0.02 0"/>
+  </joint>
+
+  <link name="p2g_0"/>
+  <link name="p2g_1"/>
+  <link name="p2g_2"/>
+  <link name="p2g_3"/>
+  <link name="toposens"/>
+  <link name="ts3_1"/>
+  <link name="walabot"/>
+  <link name="camera"/>
+  <link name="base_link" />
+  <link name="map" />
+
+</robot>

@@ -1,0 +1,47 @@
+<launch>
+
+  <!-- Camera node **************************************************************************************************-->
+ <arg name="serial_no"             default=""/>
+ <arg name="json_file_path"        default=""/>
+ <arg name="camera"                default="camera"/>
+
+ <group ns="$(arg camera)">
+   <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+     <arg name="serial_no"         value="$(arg serial_no)"/>
+     <arg name="json_file_path"    value="$(arg json_file_path)"/>
+     <arg name="depth_width"       value="640"/>
+     <arg name="depth_height"      value="480"/>
+     <arg name="depth_fps"         value="30"/>
+     <arg name="color_width"       value="640"/>
+     <arg name="color_height"      value="480"/>
+     <arg name="color_fps"         value="30"/>
+     <arg name="enable_depth"      value="true"/>
+     <arg name="enable_color"      value="true"/>
+     <arg name="enable_infra1"     value="false"/>
+     <arg name="enable_infra2"     value="false"/>
+     <arg name="enable_fisheye"    value="false"/>
+     <arg name="enable_gyro"       value="false"/>
+     <arg name="enable_accel"      value="false"/>
+     <arg name="enable_pointcloud" value="true"/>
+     <arg name="enable_sync"       value="true"/>
+     <arg name="tf_prefix"         value="$(arg camera)"/>
+   </include>
+ </group>
+
+  <!-- Toposens node *************************************************************************************************-->
+	<arg name="port" default="/dev/ttyUSB0" />
+
+	<include file="$(find toposens_markers)/launch/toposens_markers.launch">
+		<arg name="port" value="$(arg port)" />
+	</include>
+
+  <!-- Medium nodes *************************************************************************************************-->
+  <node pkg="medium_visualizer" name="medium_visualizer_node" type="medium_visualizer_node.py" output="screen"/>
+  <node pkg="medium_localizer" name="medium_localizer_node" type="medium_localizer_node.py" output="screen"/>
+	<include file="$(find medium_description)/launch/description.launch"/>
+
+  <!-- Visualization nodes *************************************************************************************************-->
+	<node pkg="rviz" type="rviz" name="markers_visualization" output="screen" args="-d $(find medium_visualizer)/rviz/medium.rviz"/>
+<!--	<node pkg="rviz" type="rviz" name="markers_visualization" output="screen" args="-d $(find toposens_markers)/rviz/toposens_markers.rviz" />-->
+
+</launch>

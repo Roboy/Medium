@@ -1,0 +1,69 @@
+<launch>
+
+  <!-- Camera node **************************************************************************************************-->
+<!--  <arg name="serial_no"             default=""/>-->
+<!--  <arg name="json_file_path"        default=""/>-->
+<!--  <arg name="camera"                default="camera"/>-->
+
+<!--  <group ns="$(arg camera)">-->
+<!--    <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">-->
+<!--      <arg name="serial_no"         value="$(arg serial_no)"/>-->
+<!--      <arg name="json_file_path"    value="$(arg json_file_path)"/>-->
+<!--      <arg name="depth_width"       value="640"/>-->
+<!--      <arg name="depth_height"      value="480"/>-->
+<!--      <arg name="depth_fps"         value="30"/>-->
+<!--      <arg name="color_width"       value="640"/>-->
+<!--      <arg name="color_height"      value="480"/>-->
+<!--      <arg name="color_fps"         value="30"/>-->
+<!--      <arg name="enable_depth"      value="true"/>-->
+<!--      <arg name="enable_color"      value="true"/>-->
+<!--      <arg name="enable_infra1"     value="false"/>-->
+<!--      <arg name="enable_infra2"     value="false"/>-->
+<!--      <arg name="enable_fisheye"    value="false"/>-->
+<!--      <arg name="enable_gyro"       value="false"/>-->
+<!--      <arg name="enable_accel"      value="false"/>-->
+<!--      <arg name="enable_pointcloud" value="true"/>-->
+<!--      <arg name="enable_sync"       value="true"/>-->
+<!--      <arg name="tf_prefix"         value="$(arg camera)"/>-->
+<!--    </include>-->
+<!--  </group>-->
+
+<!--  &lt;!&ndash; Radar node ***************************************************************************************************&ndash;&gt;-->
+<!--  <arg name="frame_id" default="position2go" />-->
+<!--  <arg name="type" default="base" /> &lt;!&ndash; alternatives: base/target &ndash;&gt;-->
+<!--  <arg name="p2g_ports" default="[/dev/ttyACM0, /dev/ttyACM1, /dev/ttyACM2, /dev/ttyACM3]"/>-->
+<!--  <arg name="p2g_frame_ids" default="[p2g_0, p2g_1, p2g_2, p2g_3]"/>-->
+
+<!--  <node pkg="p2g_ros_driver" type="p2g_ros_driver_sync_node" name="p2g_ros_driver_sync_node" output="screen">-->
+<!--    <rosparam param="frames" subst_value="true">$(arg p2g_frame_ids)</rosparam>-->
+<!--    <rosparam param="ports" subst_value="true">$(arg p2g_ports)</rosparam>-->
+<!--    <param name="type" value="$(arg type)" />-->
+<!--  </node>-->
+
+
+  <!-- Toposens node **************************************************************************************************-->
+  <arg name="ts3_ports" default="[/dev/ttyUSB0, /dev/ttyUSB1]"/>
+  <arg name="ts3_frame_ids" default="[ts3_0, ts3_1]"/>
+
+  <node pkg="toposens_sync" type="toposens_sync_node" name="ts_sync_node" output="screen">
+    <rosparam param="ports" subst_value="true">$(arg ts3_ports)</rosparam>
+    <rosparam param="frames" subst_value="true">$(arg ts3_frame_ids)</rosparam>
+  </node>
+
+  <node pkg="toposens_markers" type="toposens_markers_node" name="ts_markers_node" output="screen">
+    <param name="frame_id" value="toposens" />
+  </node>
+
+  <arg name="model" default="$(find medium_description)/urdf/sensor_rag.xacro"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="state_publisher" pkg="medi" type="state_publisher" />
+
+  <node pkg="rviz" type="rviz" name="medium_visualization_node" output="screen" args="-d $(find medium_visualizer)/rviz/medium.rviz" />
+
+  <node pkg="medium_visualizer" name="medium_visualizer_node" type="medium_visualizer_node.py" output="screen"/>
+
+
+</launch>

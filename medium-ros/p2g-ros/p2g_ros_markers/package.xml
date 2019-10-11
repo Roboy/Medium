@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>p2g_ros_markers</name>
+  <version>1.0.0</version>
+  <description>Rviz integration for Position2Go target data.</description>
+  
+  <maintainer email="christopher.lang@tum.de">Christopher Lang</maintainer>
+
+  <license>BSD</license>
+  <url type="website">TBD</url>
+  <url type="repository">TBD</url>
+  <url type="bugtracker">TBD</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>dynamic_reconfigure</depend>
+  <depend>p2g_ros_msgs</depend>
+  <depend>rviz_visual_tools</depend>
+  <depend>p2g_ros_driver</depend>
+  <depend>message_runtime</depend>
+
+</package>

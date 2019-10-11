@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="medium_localizer" type="medium_localizer_node" name="medium_localizer_node" output="screen"/>
+</launch>

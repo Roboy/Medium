@@ -1,0 +1,46 @@
+<launch>
+	<arg name="port" default="/dev/ttyUSB0" />
+
+	<include file="$(find p2g_ros_driver)/launch/p2g.launch">
+		<arg name="frame_id" value="position2go" />
+		<arg name="type" value="target" />
+	</include>
+
+	<node pkg="p2g_ros_markers" type="p2g_ros_markers_node" name="ts_markers_node" output="screen">
+		<param name="frame_id" value="position2go" />
+	</node>
+
+	<node pkg="rviz" type="rviz" name="markers_visualization" output="screen" args="-d $(find p2g_ros_markers)/rviz/p2g_with_camera.rviz"/>
+
+	<node pkg="tf" type="static_transform_publisher" name="radar_to_base" args="0 0 0 0 0 0 map position2go 10" />
+	<node pkg="tf" type="static_transform_publisher" name="camera_to_base" args="0 0 -0.1 0 0 0 map camera_color_frame 10" />
+
+	<!-- Camera node **************************************************************************************************-->
+	<arg name="serial_no"             default=""/>
+	<arg name="json_file_path"        default=""/>
+	<arg name="camera"                default="camera"/>
+
+	<group ns="$(arg camera)">
+		<include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+			<arg name="serial_no"         value="$(arg serial_no)"/>
+			<arg name="json_file_path"    value="$(arg json_file_path)"/>
+			<arg name="depth_width"       value="640"/>
+			<arg name="depth_height"      value="480"/>
+			<arg name="depth_fps"         value="30"/>
+			<arg name="color_width"       value="640"/>
+			<arg name="color_height"      value="480"/>
+			<arg name="color_fps"         value="30"/>
+			<arg name="enable_depth"      value="true"/>
+			<arg name="enable_color"      value="true"/>
+			<arg name="enable_infra1"     value="false"/>
+			<arg name="enable_infra2"     value="false"/>
+			<arg name="enable_fisheye"    value="false"/>
+			<arg name="enable_gyro"       value="false"/>
+			<arg name="enable_accel"      value="false"/>
+			<arg name="enable_pointcloud" value="true"/>
+			<arg name="enable_sync"       value="true"/>
+			<arg name="tf_prefix"         value="$(arg camera)"/>
+		</include>
+	</group>
+
+</launch>

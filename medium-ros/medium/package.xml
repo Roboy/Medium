@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>medium</name>
+  <version>1.2.1</version>
+  <description>ROS support for Roboy Medium radar measurement setup.</description>
+
+  <maintainer email="christopher.lang@tum.de">Christopher Lang</maintainer>
+  <author>Tamara Shnyrina</author>
+  <author>Lennart Aigner</author>
+  <author>Christopher Lang</author>
+
+  <license>BSD 3-Clause</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>p2g_ros_driver</exec_depend>
+  <exec_depend>p2g_ros_msgs</exec_depend>
+  <exec_depend>undistort</exec_depend>
+  <exec_depend>toposens_driver</exec_depend>
+  <exec_depend>toposens_msgs</exec_depend>
+  <exec_depend>toposens_sync</exec_depend>
+  <exec_depend>realsense2_camera</exec_depend>
+  <depend>medium_visualization</depend>
+  <depend>medium_description</depend>
+  <depend>medium_localizer</depend>
+
+
+</package>
