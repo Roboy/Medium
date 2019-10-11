@@ -10,7 +10,7 @@
 Estimating human poses is essential for most technical systems that operate in a shared environments with humans. 
 Unlike vision based approaches, Radar signals travel through walls, and allow anonymous and light-weight detection of humans.
 
-See our [medium article](https://github.com/Roboy/Medium.git) to learn more about our project.
+See our [medium article](https://medium.com/@lennartaigner/visualizing-human-poses-with-radar-behind-objects-a-preliminary-study-641eb10ba781) to learn more about our project.
 
 This repository contains our code base for the Roboby Medium 24GHz project, with ros packages for human pose detection from Radar signals, and data pipeline as well as machine learning testbed for training and testing models for human pose estimation.
 The code was developed and tested on systems running [Ubuntu 18.04](http://releases.ubuntu.com/18.04/) and [ROS melodic](http://wiki.ros.org/melodic), and is organized in three submodules, with more precises ReadMe documentation inside:
